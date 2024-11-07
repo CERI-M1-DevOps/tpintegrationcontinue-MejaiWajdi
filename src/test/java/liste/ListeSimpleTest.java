@@ -260,20 +260,55 @@ import static org.junit.jupiter.api.Assertions.*;
         System.out.println(listeATester);
         assertEquals("ListeSimple(Noeud(4), Noeud(2), Noeud(3), Noeud(1), Noeud(5))",listeATester.toString());
     }
-     public void testModifiePremier() {
+
+     public void testSupprimePremier() {
          ListeSimple liste = new ListeSimple();
          liste.ajout(1);
          liste.ajout(2);
-         liste.modifiePremier(1, 5); // Le premier élément est 1, il doit être modifié
-         assertEquals("ListeSimple(5, 2)", liste.toString());
+         liste.ajout(3);
 
-         liste.modifiePremier(3, 10); // 3 n'est pas dans la liste, rien ne doit changer
-         assertEquals("ListeSimple(5, 2)", liste.toString());
+         liste.supprimePremier(2);
+         assertEquals("ListeSimple(3, 1)", liste.toString());
 
-         liste.modifiePremier(2, 10); // Le premier élément 2 doit être modifié en 10
-         assertEquals("ListeSimple(5, 10)", liste.toString());
+         liste.supprimePremier(3);
+         assertEquals("ListeSimple(1)", liste.toString());
 
-         liste.modifiePremier(5, 20); // Le premier élément 5 doit être modifié en 20
-         assertEquals("ListeSimple(20, 10)", liste.toString());
+         liste.supprimePremier(5);
+         assertEquals("ListeSimple(1)", liste.toString());
+
+         liste.supprimePremier(1);
+         assertEquals("ListeSimple()", liste.toString());
      }
-}
+     public void testSupprimePremierAvecElementExistant() {
+         ListeSimple liste = new ListeSimple();
+         liste.ajout(1);
+         liste.ajout(2);
+
+         liste.supprimePremier(2);
+         assertEquals("ListeSimple(1)", liste.toString());
+
+         liste.supprimePremier(1);
+         assertEquals("ListeSimple()", liste.toString());
+     }
+     public void testEchanger() {
+         ListeSimple liste = new ListeSimple();
+         liste.ajout(1);
+         liste.ajout(2);
+         liste.ajout(3);
+
+         Noeud n1 = liste.tete;
+         Noeud n2 = n1.getSuivant();
+
+
+         liste.echanger(n1, n2);
+         assertEquals("ListeSimple(2, 1, 3)", liste.toString());
+
+         liste.echanger(n1, n1);
+         assertEquals("ListeSimple(2, 1, 3)", liste.toString());
+
+         Noeud n3 = n2.getSuivant();
+         liste.echanger(n1, n3);
+         assertEquals("ListeSimple(3, 1, 2)", liste.toString());
+     }
+
+ }
