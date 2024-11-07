@@ -16,9 +16,9 @@ public class ListeSimple {
     public void modifiePremier(Object element, Object nouvelleValeur) {
         Noeud courant = tete;
         while (courant != null && courant.getElement() != element)
-            courant = courant.getSuivant();
+        { courant = courant.getSuivant();}
         if (courant != null)
-            courant.setElement(nouvelleValeur);
+        {  courant.setElement(nouvelleValeur);}
     }
 
     public void modifieTous(Object element, Object nouvelleValeur) {
