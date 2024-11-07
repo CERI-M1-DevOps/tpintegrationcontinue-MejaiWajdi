@@ -260,4 +260,20 @@ import static org.junit.jupiter.api.Assertions.*;
         System.out.println(listeATester);
         assertEquals("ListeSimple(Noeud(4), Noeud(2), Noeud(3), Noeud(1), Noeud(5))",listeATester.toString());
     }
+     public void testModifiePremier() {
+         ListeSimple liste = new ListeSimple();
+         liste.ajout(1);
+         liste.ajout(2);
+         liste.modifiePremier(1, 5); // Le premier élément est 1, il doit être modifié
+         assertEquals("ListeSimple(5, 2)", liste.toString());
+
+         liste.modifiePremier(3, 10); // 3 n'est pas dans la liste, rien ne doit changer
+         assertEquals("ListeSimple(5, 2)", liste.toString());
+
+         liste.modifiePremier(2, 10); // Le premier élément 2 doit être modifié en 10
+         assertEquals("ListeSimple(5, 10)", liste.toString());
+
+         liste.modifiePremier(5, 20); // Le premier élément 5 doit être modifié en 20
+         assertEquals("ListeSimple(20, 10)", liste.toString());
+     }
 }

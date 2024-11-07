@@ -1,138 +1,143 @@
 package liste;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+public class ListeSimple {
+    private long size;
+    Noeud tete;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class ListeSimpleTest {
-
-    ListeSimple listeATester;
-
-    @BeforeEach
-    void init() {
-        listeATester = new ListeSimple();
+    public long getSize() {
+        return size;
     }
 
-    @Test
-    void listeConstruiteVide() {
-        assertNull(listeATester.tete, "La tête doit être null pour une liste vide");
-        assertEquals(0, listeATester.getSize(), "La taille doit être 0 pour une liste vide");
+    public void ajout(int element) {
+        tete = new Noeud(element, tete);
+        size++;
     }
 
-    @Test
-    void ajoutAugmenteSize() {
-        listeATester.ajout(1);
-        assertEquals(1, listeATester.getSize(), "La taille doit être de 1 après ajout d'un élément");
+    public void modifiePremier(Object element, Object nouvelleValeur) {
+        Noeud courant = tete;
+        while (courant != null && courant.getElement() != element)
+            courant = courant.getSuivant();
+        if (courant != null)
+            courant.setElement(nouvelleValeur);
     }
 
-    @Test
-    void ajoutChangeTete() {
-        listeATester.ajout(1);
-        Noeud teteApresPremierAjout = listeATester.tete;
-        listeATester.ajout(2);
-        assertNotNull(teteApresPremierAjout, "La tête ne doit pas être null après le premier ajout");
-        assertNotSame(teteApresPremierAjout, listeATester.tete, "La tête doit changer après un nouvel ajout");
+    public void modifieTous(Object element, Object nouvelleValeur) {
+        Noeud courant = tete;
+        while (courant != null) {
+            if (courant.getElement() == element)
+                courant.setElement(nouvelleValeur);
+            courant = courant.getSuivant();
+        }
     }
 
-    @Test
-    void ajoutPlusieursFoisLeMeme() {
-        listeATester.ajout(1);
-        listeATester.ajout(1);
-        listeATester.ajout(1);
-        assertEquals(3, listeATester.getSize(), "La taille doit être de 3 après ajout du même élément trois fois");
+    public String toString() {
+        StringBuilder sb = new StringBuilder("ListeSimple(");
+        Noeud n = tete;
+        while (n != null) {
+            sb.append(n);
+            n = n.getSuivant();
+            if (n != null)
+                sb.append(", ");
+        }
+        sb.append(")");
+        return sb.toString();
     }
 
-    @Test
-    void toStringDonneTousLesNoeuds() {
-        listeATester.ajout(1);
-        listeATester.ajout(2);
-        listeATester.ajout(3);
-        assertEquals("ListeSimple(Noeud(3), Noeud(2), Noeud(1))", listeATester.toString());
+    public void supprimePremier(Object element) {
+        if (tete != null) {
+            if (tete.getElement() == element) {
+                tete = tete.getSuivant();
+                size--;
+                return;
+            }
+            Noeud precedent = tete;
+            Noeud courant = tete.getSuivant();
+            while (courant != null && courant.getElement() != element) {
+                precedent = precedent.getSuivant();
+                courant = courant.getSuivant();
+            }
+            if (courant != null) {
+                precedent.setSuivant(courant.getSuivant());
+                size--;
+            }
+        }
     }
 
-    @Test
-    void modifiePremierVide(){
-        listeATester.modifiePremier(1, 2);
-        assertEquals("ListeSimple()", listeATester.toString(), "La modification d'un élément inexistant ne doit rien changer");
+    public void supprimeTous(int element) {
+       tete = supprimeTousRecurs(element, tete);
     }
 
-    @Test
-    void modifiePremier() {
-        listeATester.ajout(1);
-        listeATester.ajout(2);
-        listeATester.ajout(3);
-        listeATester.modifiePremier(2, 4);
-        assertEquals("ListeSimple(Noeud(3), Noeud(4), Noeud(1))", listeATester.toString());
+    public Noeud supprimeTousRecurs(Object element, Noeud tete) {
+        if (tete != null) {
+            Noeud suiteListe = supprimeTousRecurs(element, tete.getSuivant());
+            if (tete.getElement() == element) {
+                size--;
+                return suiteListe;
+            } else {
+                tete.setSuivant(suiteListe);
+                return tete;
+            }
+        } else return null;
     }
 
-    @Test
-    void modifieTous() {
-        listeATester.ajout(1);
-        listeATester.ajout(2);
-        listeATester.ajout(1);
-        listeATester.modifieTous(1, 4);
-        assertEquals("ListeSimple(Noeud(4), Noeud(2), Noeud(4))", listeATester.toString());
+    public Noeud getAvantDernier() {
+        if (tete == null || tete.getSuivant() == null)
+            return null;
+        else {
+            Noeud courant = tete;
+            Noeud suivant = courant.getSuivant();
+            while (suivant.getSuivant() != null) {
+                courant = suivant;
+                suivant = suivant.getSuivant();
+            }
+            return courant;
+        }
     }
 
-    @Test
-    void supprimePremierListeVide() {
-        listeATester.supprimePremier(1);
-        assertNull(listeATester.tete, "La tête doit être null si la liste est vide");
+    public void inverser() {
+        Noeud precedent = null;
+        Noeud courant = tete;
+        while (courant != null) {
+            Noeud next = courant.getSuivant();
+            courant.setSuivant(precedent);
+            precedent = courant;
+            courant = next;
+        }
+        tete = precedent;
     }
 
-    @Test
-    void supprimePremierEnPremierePosition() {
-        listeATester.ajout(1);
-        listeATester.ajout(2);
-        listeATester.ajout(3);
-        listeATester.supprimePremier(3);
-        assertEquals("ListeSimple(Noeud(2), Noeud(1))", listeATester.toString());
+    public Noeud getPrecedent(Noeud r) {
+    // la liste n'est pas vide puisqu'on transmet un Node de la liste et le Node existe obligatoirement
+        Noeud precedent = tete;
+        Noeud courant = precedent.getSuivant();
+        while (courant != r) {
+            precedent = courant;
+            courant = courant.getSuivant();
+        }
+        return precedent;
     }
 
-    @Test
-    void supprimePremierEnDernierePosition() {
-        listeATester.ajout(1);
-        listeATester.ajout(2);
-        listeATester.ajout(3);
-        listeATester.supprimePremier(1);
-        assertEquals("ListeSimple(Noeud(3), Noeud(2))", listeATester.toString());
-    }
-
-    @Test
-    void supprimeTousListeVide() {
-        listeATester.supprimePremier(1);
-        assertNull(listeATester.tete, "La tête doit rester null pour une liste vide");
-    }
-
-    @Test
-    void avantDernierListeVide() {
-        assertNull(listeATester.getAvantDernier(), "Avant-dernier doit être null pour une liste vide");
-    }
-
-    @Test
-    void avantDernierListeADeuxElements() {
-        listeATester.ajout(1);
-        listeATester.ajout(2);
-        assertEquals(2, listeATester.getAvantDernier().getElement(), "Le seul élément avant le dernier doit être lui-même");
-    }
-
-    @Test
-    void inverserListeVide() {
-        listeATester.inverser();
-        assertNull(listeATester.tete, "L'inversion d'une liste vide doit donner une liste vide");
-    }
-
-    @Test
-    void echanger2NoeudsQuelconques() {
-        listeATester.ajout(5);
-        listeATester.ajout(4);
-        Noeud r1 = listeATester.tete;
-        listeATester.ajout(3);
-        listeATester.ajout(2);
-        Noeud r2 = listeATester.tete;
-        listeATester.ajout(1);
-        listeATester.echanger(r1, r2);
-        assertEquals("ListeSimple(Noeud(1), Noeud(4), Noeud(3), Noeud(2), Noeud(5))", listeATester.toString());
+    public void echanger(Noeud r1, Noeud r2) {
+        if (r1 != r2) {
+            Noeud precedentR1;
+            Noeud precedentR2;
+            if (r1 != tete && r2 != tete) {
+                precedentR1 = getPrecedent(r1);
+                precedentR2 = getPrecedent(r2);
+                precedentR1.setSuivant(r2);
+                precedentR2.setSuivant(r1);
+            } else if (r1 == tete) {
+                precedentR2 = getPrecedent(r2);
+                precedentR2.setSuivant(tete);
+                tete = r2;
+            } else {
+                precedentR1 = getPrecedent(r1);
+                precedentR1.setSuivant(tete);
+                tete = r1;
+            }
+            Noeud temp = r2.getSuivant();
+            r2.setSuivant(r1.getSuivant());
+            r1.setSuivant(temp);
+        }
     }
 }
