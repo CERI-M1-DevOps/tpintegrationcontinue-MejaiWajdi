@@ -16,9 +16,9 @@ public class ListeSimple {
     public void modifiePremier(Object element, Object nouvelleValeur) {
         Noeud courant = tete;
         while (courant != null && courant.getElement() != element)
-        { courant = courant.getSuivant();}
+            courant = courant.getSuivant();
         if (courant != null)
-        {  courant.setElement(nouvelleValeur);}
+            courant.setElement(nouvelleValeur);
     }
 
     public void modifieTous(Object element, Object nouvelleValeur) {
@@ -131,7 +131,7 @@ public class ListeSimple {
             precedentR2.setSuivant(tete);
             tete = r2;
         }
-        else if (r2 == tete) {
+        else  {
             precedentR1 = getPrecedent(r1);
             precedentR1.setSuivant(tete);
             tete = r1;
