@@ -2,6 +2,8 @@ package liste;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -93,7 +95,7 @@ import static org.junit.jupiter.api.Assertions.*;
         assertEquals(2, listeATester.getSize());
     }
 
-    @Test
+   /* @Test
      void supprimePremierEnPositionQuelconque() {
         listeATester.ajout(1);
         listeATester.ajout(2);
@@ -113,7 +115,7 @@ import static org.junit.jupiter.api.Assertions.*;
         listeATester.supprimePremier(1);
         assertEquals( "ListeSimple(Noeud(4), Noeud(3), Noeud(2))",listeATester.toString());
         assertEquals(3, listeATester.getSize());
-    }
+    }*/
 
 
   /*  @Test
@@ -281,7 +283,7 @@ import static org.junit.jupiter.api.Assertions.*;
         assertEquals("ListeSimple(Noeud(1), Noeud(3), Noeud(2), Noeud(4), Noeud(5))",listeATester.toString());
 
     }
-    @Test
+  /*  @Test
     void supprimePremierMilieuListe() {
         listeATester.ajout(1);
         listeATester.ajout(2);
@@ -291,7 +293,7 @@ import static org.junit.jupiter.api.Assertions.*;
         assertEquals("ListeSimple(Noeud(4), Noeud(3), Noeud(1))", listeATester.toString());
         assertEquals(3, listeATester.getSize());
     }
-
+*/
     @Test
     void supprimePremierElementAbsent() {
         listeATester.ajout(1);
@@ -316,5 +318,24 @@ import static org.junit.jupiter.api.Assertions.*;
         assertEquals( "ListeSimple(Noeud(2), Noeud(1))" , listeATester.toString());
         assertEquals( 2 , listeATester.getSize());
     }
-}
+
+     @ParameterizedTest
+     @CsvSource({
+             "1, ListeSimple(Noeud(3), Noeud(2)), 2",
+             "2, ListeSimple(Noeud(4), Noeud(3), Noeud(1)), 3",
+             "4, ListeSimple(Noeud(3), Noeud(2), Noeud(1)), 3"
+     })
+     void testSupprimePremier(int elementToRemove, String expectedList, int expectedSize) {
+         listeATester.ajout(1);
+         listeATester.ajout(2);
+         listeATester.ajout(3);
+         listeATester.ajout(4);
+
+         listeATester.supprimePremier(elementToRemove);
+
+         assertEquals(expectedList, listeATester.toString());
+         assertEquals(expectedSize, listeATester.getSize());
+     }
+
+ }
 
