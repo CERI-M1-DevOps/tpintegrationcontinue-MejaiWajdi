@@ -261,7 +261,7 @@ public class ListeSimpleTest {
         listeATester.ajout(1);
         listeATester.ajout(2);
         listeATester.ajout(3);
-        listeATester.modifiePremier(1, 4); // l'élément recherché se trouve après plusieurs noeuds
+        listeATester.modifiePremier(4, 5); // l'élément recherché se trouve après plusieurs noeuds
         assertEquals("ListeSimple(Noeud(3), Noeud(2), Noeud(4))", listeATester.toString());
     }
 
