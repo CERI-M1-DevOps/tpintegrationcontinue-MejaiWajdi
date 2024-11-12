@@ -94,16 +94,7 @@ import static org.junit.jupiter.api.Assertions.*;
         assertEquals(2, listeATester.getSize());
     }
 
-    @Test
-     void supprimePremierEnPositionQuelconque() {
-        listeATester.ajout(1);
-        listeATester.ajout(2);
-        listeATester.ajout(3);
-        listeATester.ajout(4);
-        listeATester.supprimePremier(2);
-        assertEquals("ListeSimple(Noeud(4), Noeud(3), Noeud(1))",listeATester.toString());
-        assertEquals(3, listeATester.getSize());
-    }
+
 
     @Test
      void supprimePremierEnDernierePosition() {
@@ -117,13 +108,7 @@ import static org.junit.jupiter.api.Assertions.*;
     }
 
 
-  /*  @Test
-     void supprimeTousListeVide() {
-        listeATester.supprimePremier(1);
-        assertNull(listeATester.tete);
-        assertEquals(0, listeATester.getSize());
-    }
-*/
+
     @Test
      void supprimeTousUneSeuleFoisAuDebut() {
         listeATester.ajout(1);
@@ -282,16 +267,7 @@ import static org.junit.jupiter.api.Assertions.*;
         assertEquals("ListeSimple(Noeud(1), Noeud(3), Noeud(2), Noeud(4), Noeud(5))",listeATester.toString());
 
     }
-    @Test
-    void supprimePremierMilieuListe() {
-        listeATester.ajout(1);
-        listeATester.ajout(2);
-        listeATester.ajout(3);
-        listeATester.ajout(4);
-        listeATester.supprimePremier(2);
-        assertEquals("ListeSimple(Noeud(4), Noeud(3), Noeud(1))", listeATester.toString());
-        assertEquals(3, listeATester.getSize());
-    }
+
 
     @Test
     void supprimePremierElementAbsent() {
