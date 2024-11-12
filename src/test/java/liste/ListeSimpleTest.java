@@ -2,8 +2,7 @@ package liste;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -95,7 +94,7 @@ import static org.junit.jupiter.api.Assertions.*;
         assertEquals(2, listeATester.getSize());
     }
 
-   /* @Test
+    @Test
      void supprimePremierEnPositionQuelconque() {
         listeATester.ajout(1);
         listeATester.ajout(2);
@@ -115,7 +114,7 @@ import static org.junit.jupiter.api.Assertions.*;
         listeATester.supprimePremier(1);
         assertEquals( "ListeSimple(Noeud(4), Noeud(3), Noeud(2))",listeATester.toString());
         assertEquals(3, listeATester.getSize());
-    }*/
+    }
 
 
   /*  @Test
@@ -283,7 +282,7 @@ import static org.junit.jupiter.api.Assertions.*;
         assertEquals("ListeSimple(Noeud(1), Noeud(3), Noeud(2), Noeud(4), Noeud(5))",listeATester.toString());
 
     }
-  /*  @Test
+    @Test
     void supprimePremierMilieuListe() {
         listeATester.ajout(1);
         listeATester.ajout(2);
@@ -293,7 +292,7 @@ import static org.junit.jupiter.api.Assertions.*;
         assertEquals("ListeSimple(Noeud(4), Noeud(3), Noeud(1))", listeATester.toString());
         assertEquals(3, listeATester.getSize());
     }
-*/
+
     @Test
     void supprimePremierElementAbsent() {
         listeATester.ajout(1);
