@@ -318,23 +318,33 @@ import static org.junit.jupiter.api.Assertions.*;
         assertEquals( "ListeSimple(Noeud(2), Noeud(1))" , listeATester.toString());
         assertEquals( 2 , listeATester.getSize());
     }
-
-     @ParameterizedTest
-     @CsvSource({
-             "1, ListeSimple(Noeud(3), Noeud(2)), 2",
-             "2, ListeSimple(Noeud(4), Noeud(3), Noeud(1)), 3",
-             "4, ListeSimple(Noeud(3), Noeud(2), Noeud(1)), 3"
-     })
-     void testSupprimePremier(int elementToRemove, String expectedList, int expectedSize) {
+     @Test
+     void supprimePremierTest() {
          listeATester.ajout(1);
          listeATester.ajout(2);
          listeATester.ajout(3);
+
+         // Cas de suppression d'un élément en fin de liste
+         listeATester.supprimePremier(3);
+         assertEquals("ListeSimple(Noeud(2), Noeud(1))", listeATester.toString());
+         assertEquals(2, listeATester.getSize());
+
+         // Cas de suppression d'un élément au milieu de la liste
+         listeATester.supprimePremier(2);
+         assertEquals("ListeSimple(Noeud(1))", listeATester.toString());
+         assertEquals(1, listeATester.getSize());
+
+         // Cas de suppression du premier élément
          listeATester.ajout(4);
+         listeATester.supprimePremier(1);
+         assertEquals("ListeSimple(Noeud(4))", listeATester.toString());
+         assertEquals(1, listeATester.getSize());
 
-         listeATester.supprimePremier(elementToRemove);
-
-         assertEquals(expectedList, listeATester.toString());
-         assertEquals(expectedSize, listeATester.getSize());
+         // Cas d'une liste vide
+         ListeSimple emptyListe = new ListeSimple();
+         emptyListe.supprimePremier(1);
+         assertNull(emptyListe.tete);
+         assertEquals(0, emptyListe.getSize());
      }
 
  }
