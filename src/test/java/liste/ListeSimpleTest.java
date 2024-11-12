@@ -256,13 +256,16 @@ public class ListeSimpleTest {
         System.out.println(listeATester);
         assertEquals(listeATester.toString(), "ListeSimple(Noeud(4), Noeud(2), Noeud(3), Noeud(1), Noeud(5))");
     }
+
     @Test
-    public void modifiePremierTrouveApresParcours() {
+    void echangerMemeNoeud() {
         listeATester.ajout(1);
-        listeATester.ajout(2);
-        listeATester.ajout(3);
-        listeATester.modifiePremier(4, 5); // l'élément recherché se trouve après plusieurs noeuds
-        assertEquals("ListeSimple(Noeud(3), Noeud(2), Noeud(4))", listeATester.toString());
+        Noeud r1 = listeATester.tete;
+        listeATester.echanger(r1, r1);
+        assertEquals("ListeSimple(Noeud(1))",listeATester.toString());
     }
 
+
+
 }
+
