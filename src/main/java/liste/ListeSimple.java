@@ -80,6 +80,7 @@ public class ListeSimple {
         } else return null;
     }
 
+
     public Noeud getAvantDernier() {
         if (tete == null || tete.getSuivant() == null)
             return null;
