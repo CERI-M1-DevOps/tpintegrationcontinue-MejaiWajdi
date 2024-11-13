@@ -1,10 +1,6 @@
 name: Generate Documentation
 
-on:
- push:
-   branches:
-    -dev
-
+on: [push]
 
 jobs:
   generate-doc:
