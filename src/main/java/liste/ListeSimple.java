@@ -3,16 +3,26 @@ package liste;
 public class ListeSimple {
     private long size;
     Noeud tete;
-
+    /**
+     * Retourne la taille de la liste.
+     * @return le nombre d'éléments dans la liste
+     */
     public long getSize() {
         return size;
     }
-
+    /**
+     * Ajoute un élément au début de la liste.
+     * @param element l'élément à ajouter
+     */
     public void ajout(int element) {
         tete = new Noeud(element, tete);
         size++;
     }
-
+    /**
+     * Modifie la première occurrence d'un élément dans la liste.
+     * @param element l'élément à rechercher
+     * @param nouvelleValeur la nouvelle valeur à attribuer à l'élément trouvé
+     */
     public void modifiePremier(Object element, Object nouvelleValeur) {
         Noeud courant = tete;
         while (courant != null && courant.getElement() != element)
